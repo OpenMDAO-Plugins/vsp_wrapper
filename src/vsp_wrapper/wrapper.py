@@ -78,54 +78,54 @@ class VSP(ExternalCode):
         self.write_input(filename)
 
         # Determine command line and output files.
-        cmdline = '%s -batch %s' % (self.vsp_path, filename)
+        cmd = [self.vsp_path, '-batch', filename]
         output_files = []
 
         if self.comp_geom:
-            cmdline += ' -compgeom'
+            cmd.append('-compgeom')
             output_files.extend(('compgeom.txt', 'comp_geom.csv'))
 
         if self.generate_cfd_mesh:
-            cmdline += ' -cfdmesh'
+            cmd.append('-cfdmesh')
             output_files.extend(('bodyin.dat', 'bodyin.key',
                                  'cfdmesh.bez', 'cfdmesh.stl'))
         if self.slice:
-            cmdline += ' -slice %s %s %s' \
-                       % (self.num_slices, self.mach, self.cone_sections)
+            cmd.extend(['-slice', str(self.num_slices),
+                        str(self.mach), str(self.cone_sections)])
 
         if self.write_xsec:
-            cmdline += ' -xsec'
+            cmd.append('-xsec')
             output_files.append('%s.hrm' % base_filename)
 
         if self.write_felisa:
-            cmdline += ' -felisa'
+            cmd.append('-felisa')
             for ext in ('fel', 'bsf', 'bac'):
                 output_files.append('%s.%s' % (base_filename, ext))
 
         if self.write_stereo:
-            cmdline += ' -stereo'
+            cmd.append('-stereo')
             output_files.append('%s.stl' % base_filename)
 
         if self.write_rhino:
-            cmdline += ' -rhino'
+            cmd.append('-rhino')
             output_files.append('%s.3dm' % base_filename)
 
         if self.write_nascart:
-            cmdline += ' -nascart'
+            cmd.append('-nascart')
             output_files.extend(('bodyin.dat', 'bodyin.key'))
 
         if self.write_tecplot:
-            cmdline += ' -tecplot'
+            cmd.append('-tecplot')
 
         if self.write_stecplot:
-            cmdline += ' -stecplot'
+            cmd.append('-stecplot')
 
         for name in output_files:
             if os.path.exists(name):
                 os.remove(name)
 
         # Run VSP.
-        self.command = cmdline
+        self.command = cmd
         self.stdout = os.path.basename(self.xml_filename)+'.log'
         self.stderr = ExternalCode.STDOUT
         super(VSP, self).execute()
