@@ -18,7 +18,7 @@ The vsp_wrapper esposes the XML parameters found in the input container, execute
     theoretical_area = Float(iotype='out', desc='Total area of all parts.')
     wetted_area = Float(iotype='out', desc='Total external area.')
     theoretical_volume = Float(iotype='out', desc='Total volume of all parts.')
-    wetted_volume = Float(iotype='out', desc='Total internal volume,')
+    wetted_volume = Float(iotype='out', desc='Total internal volume.')
 
 VSP can be imported from ''vsp_wrapper.py'', which should be in the site-packages directory of 
 your activated Python environment once it is installed.

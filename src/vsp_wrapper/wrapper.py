@@ -43,7 +43,7 @@ class VSP(ExternalCode):
     theoretical_area = Float(iotype='out', desc='Total area of all parts.')
     wetted_area = Float(iotype='out', desc='Total external area.')
     theoretical_volume = Float(iotype='out', desc='Total volume of all parts.')
-    wetted_volume = Float(iotype='out', desc='Total internal volume,')
+    wetted_volume = Float(iotype='out', desc='Total internal volume.')
 
     def __init__(self, xml_filename, *args, **kwargs):
         super(VSP, self).__init__(*args, **kwargs)
