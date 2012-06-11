@@ -51,9 +51,9 @@ class VSP(ExternalCode):
         self.add('geometry', VSPGeometry())
         self._etree = None
 
-    def tree_rooted(self):
+    def configure(self):
         """ If specified, read XML file. """
-        super(VSP, self).tree_rooted()
+        super(VSP, self).configure()
         self.external_files = []
 
         if self.xml_filename:
