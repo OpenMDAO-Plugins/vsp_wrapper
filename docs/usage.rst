@@ -19,6 +19,10 @@ The vsp_wrapper esposes the XML parameters found in the input container, execute
     wetted_area = Float(iotype='out', desc='Total external area.')
     theoretical_volume = Float(iotype='out', desc='Total volume of all parts.')
     wetted_volume = Float(iotype='out', desc='Total internal volume.')
+    horiz_wet_area = Float(iotype='out', desc='External area of horizontal tail.')
+    vert_wet_area = Float(iotype='out', desc='External area of vertical tail.')
+    wing_wet_area = Float(iotype='out', desc='External area of wing.')
+    fuse_wet_area = Float(iotype='out', desc='External area of fuselage.')
 
 VSP can be imported from ''vsp_wrapper.py'', which should be in the site-packages directory of 
 your activated Python environment once it is installed.
@@ -27,12 +31,94 @@ your activated Python environment once it is installed.
 
     from vsp_wrapper import VSP
 
-Generally, the easiest way for you to import your existing VPS container into the OpenMDAO component is to use 
-the ''set_as_top'' method.
+Generally, the easiest way for you to import your existing VSP container into the OpenMDAO component is to create
+a component instance and add it to the workflow
 
 ::
 
-    vsp_comp = set_as_top(VSP('my_input.xml'))
+    class VSP_Model(Assembly):
+    
+         def configure(self):
+            super(VSP_Model, self).configure()
+            #create component instance and add to workflow
+            self.add('vsp', VSP('Cessna182.xml'))
 
-When the vsp_wrapper is instantiated, an XML file must be specified in order for it to run.
+When the vsp_wrapper is instantiated, an XML file must be specified in order for it to run, as can be seen from above.
 
+When updating input values for the vsp wrapper, the XML file must be updated.  As an example, below you can see an 
+abbreviated form of the Cessna182.xml file referenced above.
+
+::
+
+    <?xml version="1.0"?>
+    <Ram_Geometry>
+      <Version>3</Version>
+      <Name>GE_90</Name>
+      <Component_List>
+        <Component>
+          <Type>Fuselage</Type>
+          <General_Parms>
+            <Name>Fuselage</Name>
+            <Id_Number>0</Id_Number>
+            <Id_String>15324000</Id_String>
+            ...
+          </General_Parms>
+          <Fuse_Parms>
+            <Fuse_Length>26.000000</Fuse_Length>
+            <Camber>0.000000</Camber>
+            <Camber_Location>0.500000</Camber_Location>
+            ...
+          </Fuse_Parms>
+          <Cross_Section_List>
+            <Cross_Section>
+              <Num_Pnts>41</Num_Pnts>
+              <Spine_Location>0.000000</Spine_Location>
+              <Z_Offset>0.000000</Z_Offset>
+              ...
+              <OML_Parms>
+                <Type>0</Type>
+                <Height>0.000000</Height>
+                <Width>0.000000</Width>
+                <Max_Width_Location>0.000000</Max_Width_Location>
+                ...
+              </OML_Parms>
+              <IML_Parms>
+                <Type>2</Type>
+                <Height>3.000000</Height>
+                <Width>2.500000</Width>
+                ...
+              </IML_Parms>
+            </Cross_Section>
+            <Cross_Section>
+              <Num_Pnts>41</Num_Pnts>
+              <Spine_Location>0.059588</Spine_Location>
+              <Z_Offset>0.000000</Z_Offset>
+              ...
+              <OML_Parms>
+                <Type>1</Type>
+                <Height>1.000000</Height>
+                <Width>1.000000</Width>
+                ...
+              </OML_Parms>
+              <IML_Parms>
+                <Type>2</Type>
+                <Height>3.000000</Height>
+                <Width>2.500000</Width>
+                ...
+              </IML_Parms>
+            </Cross_Section>
+            
+
+In this example, 'Fuse_Length' would be mapped to:
+
+::
+
+    vsp.geometry.Fuselage.fuse_parms.fuse_length
+    
+Whereas 'Width' under IML Parms in the first cross section would be mapped to:
+
+::
+
+    vsp.geometry.Fuselage.Cross_Section_0.iml_parms.width
+    
+In general, 'terminal' nodes become Variables with names forced to lower-case. Lists become enumerated Containers, starting at zero.
