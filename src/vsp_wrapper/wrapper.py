@@ -53,6 +53,7 @@ class VSP(ExternalCode):
 
     def configure(self):
         """ If specified, read XML file. """
+        super(VSP, self).configure()
         self.external_files = []
 
         if self.xml_filename:
