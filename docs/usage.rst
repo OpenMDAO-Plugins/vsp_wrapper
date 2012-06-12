@@ -121,4 +121,19 @@ Whereas 'Width' under IML Parms in the first cross section would be mapped to:
 
     vsp.geometry.Fuselage.Cross_Section_0.iml_parms.width
     
-In general, 'terminal' nodes become Variables with names forced to lower-case. Lists become enumerated Containers, starting at zero.
+In general, 'terminal' nodes become Variables with names forced to lower-case, lists become enumerated Containers starting at zero, 
+and vary similar to the generic structure shown below.
+
+::
+
+    instance_of_wrapper.geometry.Part_Name.List_(0,1,2,3...).variable
+    
+These variables can be changed by simply assigning a value:
+
+::
+
+     vsp.geometry.Fuselage.fuse_parms.fuse_length = 24
+     vsp.geometry.Fuselage.Cross_Section_0.iml_parms.width = 2.7
+     
+Now when the wrapper is run and the new XML file generated, any changes made will be reflected there prior to being passed to
+OpenVSP for analysis.
