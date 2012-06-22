@@ -21,7 +21,7 @@ class VSP(ExternalCode):
     xml_filename = Str('VspAircraft.xml', iotype='in',
                        desc='Path to the base VSP XML file.')
 
-    comp_geom = Bool(False, iotype='in',
+    comp_geom = Bool(True, iotype='in',
                      desc='Compute areas and volumes.')
 
     generate_cfd_mesh = Bool(False, iotype='in',
@@ -43,7 +43,11 @@ class VSP(ExternalCode):
     theoretical_area = Float(iotype='out', desc='Total area of all parts.')
     wetted_area = Float(iotype='out', desc='Total external area.')
     theoretical_volume = Float(iotype='out', desc='Total volume of all parts.')
-    wetted_volume = Float(iotype='out', desc='Total internal volume,')
+    wetted_volume = Float(iotype='out', desc='Total internal volume.')
+    horiz_wet_area = Float(iotype='out', desc='External area of horizontal tail.')
+    vert_wet_area = Float(iotype='out', desc='External area of vertical tail.')
+    wing_wet_area = Float(iotype='out', desc='External area of wing.')
+    fuse_wet_area = Float(iotype='out', desc='External area of fuselage.')
 
     def __init__(self, xml_filename, *args, **kwargs):
         super(VSP, self).__init__(*args, **kwargs)
@@ -83,7 +87,7 @@ class VSP(ExternalCode):
 
         if self.comp_geom:
             cmd.append('-compgeom')
-            output_files.extend(('compgeom.txt', 'comp_geom.csv'))
+            output_files.extend((base_filename + '_CompGeom.txt', base_filename + '_CompGeom.csv'))
 
         if self.generate_cfd_mesh:
             cmd.append('-cfdmesh')
@@ -129,13 +133,20 @@ class VSP(ExternalCode):
         self.stdout = os.path.basename(self.xml_filename)+'.log'
         self.stderr = ExternalCode.STDOUT
         super(VSP, self).execute()
-
-        # Read last line of -compgeom output.
+       
+        # Read from -compgeom output.
         if self.comp_geom:
-            reader = csv.reader(open('comp_geom.csv', 'r'))
+            reader = csv.reader(open(filename + '_CompGeom.csv', 'r'))
+            next(reader)
             row = []
+            wet_areas = {'Horizontal_Tail':0, 'Vertical_Tail':0, 'Wing':0, 'Fuselage':0}
             for row in reader:
-                pass
+                if row[0] in wet_areas:
+                    wet_areas[row[0]] = wet_areas.get(row[0]) + float(row[2])
+            self.horiz_wet_area = wet_areas.get('Horizontal_Tail')
+            self.vert_wet_area = wet_areas.get('Vertical_Tail')
+            self.wing_wet_area = wet_areas.get('Wing')
+            self.fuse_wet_area = wet_areas.get('Fuselage')
             if len(row) == 5:
                 self.theoretical_area = float(row[1])
                 self.wetted_area = float(row[2])
