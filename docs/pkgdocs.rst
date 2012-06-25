@@ -24,7 +24,7 @@ Package Metadata
     vsp_wrapper.cabin.CrossSection=vsp_wrapper.cabin:CrossSection
     vsp_wrapper.hwb.HWBParms=vsp_wrapper.hwb:HWBParms
     vsp_wrapper.ms_wing.MSWing=vsp_wrapper.ms_wing:MSWing
-    vsp_wrapper.mesh.MeshParms=vsp_wrapper.mesh:MeshParms
+    vsp_wrapper.fuselage2.Fuselage2=vsp_wrapper.fuselage2:Fuselage2
     vsp_wrapper.pod.PodParms=vsp_wrapper.pod:PodParms
     vsp_wrapper.hwb.HWB=vsp_wrapper.hwb:HWB
     vsp_wrapper.window.VirtWindow=vsp_wrapper.window:VirtWindow
@@ -59,7 +59,7 @@ Package Metadata
     vsp_wrapper.engine.Engine=vsp_wrapper.engine:Engine
     vsp_wrapper.blank.Blank=vsp_wrapper.blank:Blank
     vsp_wrapper.xml_container.XMLContainer=vsp_wrapper.xml_container:XMLContainer
-    vsp_wrapper.fuselage2.Fuselage2=vsp_wrapper.fuselage2:Fuselage2
+    vsp_wrapper.mesh.MeshParms=vsp_wrapper.mesh:MeshParms
     vsp_wrapper.airfoil.Airfoil=vsp_wrapper.airfoil:Airfoil
     vsp_wrapper.duct.DuctParms=vsp_wrapper.duct:DuctParms
     vsp_wrapper.source.PointSource=vsp_wrapper.source:PointSource
