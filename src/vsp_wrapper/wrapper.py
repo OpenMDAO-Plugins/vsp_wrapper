@@ -49,8 +49,8 @@ class VSP(ExternalCode):
     wing_wet_area = Float(iotype='out', desc='External area of wing.')
     fuse_wet_area = Float(iotype='out', desc='External area of fuselage.')
 
-    def __init__(self, xml_filename, *args, **kwargs):
-        super(VSP, self).__init__(*args, **kwargs)
+    def __init__(self, xml_filename):
+        super(VSP, self).__init__()
         self.xml_filename = xml_filename
         self.add('geometry', VSPGeometry())
         self._etree = None
