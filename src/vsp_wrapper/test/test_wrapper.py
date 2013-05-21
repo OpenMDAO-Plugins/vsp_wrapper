@@ -12,7 +12,7 @@ from openmdao.util.testutil import assert_raises, assert_rel_error
 from vsp_wrapper import VSP
 
 ORIG_DIR = os.getcwd()
-VSP_PATH = '/home/setowns1/bin/vsp'
+VSP_PATH = 'vsp'
 
 
 class TestCase(unittest.TestCase):

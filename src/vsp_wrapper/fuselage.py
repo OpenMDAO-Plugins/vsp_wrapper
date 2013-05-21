@@ -253,7 +253,7 @@ class OMLParms(MLParms):
         super(OMLParms, self).__init__(self.XMLTAG)
 
 
-class IMLParms(XMLContainer):
+class IMLParms(MLParms):
     """ XML parameters specific to a fuselage cross-section OML. """
 
     XMLTAG = 'IML_Parms'
