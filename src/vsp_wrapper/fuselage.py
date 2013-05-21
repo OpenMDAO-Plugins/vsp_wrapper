@@ -254,7 +254,7 @@ class OMLParms(MLParms):
 
 
 class IMLParms(MLParms):
-    """ XML parameters specific to a fuselage cross-section OML. """
+    """ XML parameters specific to a fuselage cross-section IML. """
 
     XMLTAG = 'IML_Parms'
 

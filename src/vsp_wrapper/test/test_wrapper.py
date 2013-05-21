@@ -7,6 +7,7 @@ import sys
 import unittest
 
 from openmdao.main.api import set_as_top
+from openmdao.util.fileutil import find_in_path
 from openmdao.util.testutil import assert_raises, assert_rel_error
 
 from vsp_wrapper import VSP
@@ -23,6 +24,10 @@ class TestCase(unittest.TestCase):
 
     def setUp(self):
         """ Called before each test in this class. """
+        
+        if not find_in_path(VSP_PATH):
+            raise nose.SkipTest('VSP needs to be installed to run this test.')
+        
         os.chdir(TestCase.directory)
 
     def tearDown(self):

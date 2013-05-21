@@ -7,5 +7,5 @@ and then VSP is run in batch mode.
 
 To view the Sphinx documentation for this distribution, type:
 
-plugin_docs vsp_wrapper
+openmdao docs vsp_wrapper
 
