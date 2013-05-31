@@ -1,5 +1,5 @@
 
 
 graft src/vsp_wrapper/sphinx_build/html
-recursive-include src/vsp_wrapper/test *.py *.xml
+recursive-include src/vsp_wrapper/test *.py *.xml *.vsp
 

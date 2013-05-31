@@ -9,6 +9,7 @@ import unittest
 from openmdao.main.api import set_as_top
 from openmdao.util.fileutil import find_in_path
 from openmdao.util.testutil import assert_raises, assert_rel_error
+from openmdao.main.component import SimulationRoot
 
 from vsp_wrapper import VSP
 
@@ -27,20 +28,23 @@ class TestCase(unittest.TestCase):
         """ Called before each test in this class. """
         
         if not find_in_path(VSP_PATH):
-            raise nose.SkipTest('VSP needs to be installed to run this test.')
-        
+            raise nose.SkipTest('VSP must be installed to run this test.')
         os.chdir(TestCase.directory)
+        SimulationRoot.chroot(os.getcwd())
 
     def tearDown(self):
         """ Remove output files. """
-        for pattern in ('*.3dm', '*.bac', '*.bsf', '*.fel', '*.hrm', '*.log',
-                        '*.new', '*.stl',
-                        'bodyin.*', 'cfdmesh.*', 'comp_geom.*'):
-            for name in glob.glob(pattern):
-                os.remove(name)
-        os.chdir(ORIG_DIR)
+        try:
+            for pattern in ('*.3dm', '*.bac', '*.bsf', '*.fel', '*.hrm', '*.log',
+                           '*.new', '*.stl',
+                           'bodyin.*', 'cfdmesh.*', 'comp_geom.*'):
+                for name in glob.glob(pattern):
+                    os.remove(name)
+        finally:
+            os.chdir(ORIG_DIR)
+            SimulationRoot.chroot(os.getcwd())
 
-# VSP has problems with -compgeom even with original XML file.
+# # VSP has problems with -compgeom even with original XML file.
     def test_777(self):
         logging.debug('')
         logging.debug('test_777')
@@ -80,10 +84,10 @@ class TestCase(unittest.TestCase):
         vsp.run()
 
         # 'desired' from Linux, 'tolerance' for Mac/Windows.
-        assert_rel_error(self, vsp.theoretical_area, 849.669075, 0.0001)
-        assert_rel_error(self, vsp.theoretical_volume, 303.350163, 0.0001)
-        assert_rel_error(self, vsp.wetted_area, 713.083095, 0.0001)
-        assert_rel_error(self, vsp.wetted_volume, 287.489547, 0.0001)
+        assert_rel_error(self, vsp.theoretical_area, 849.669075, 0.0005)
+        assert_rel_error(self, vsp.theoretical_volume, 303.350163, 0.002)
+        assert_rel_error(self, vsp.wetted_area, 713.083095, 0.0005)
+        assert_rel_error(self, vsp.wetted_volume, 287.489547, 0.002)
 
     def test_eagle_eye(self):
         logging.debug('')
@@ -102,10 +106,10 @@ class TestCase(unittest.TestCase):
         vsp.run()
 
         # 'desired' from Linux, 'tolerance' for Mac/Windows.
-        assert_rel_error(self, vsp.theoretical_area, 374.888362, 0.0001)
-        assert_rel_error(self, vsp.theoretical_volume, 104.646845, 0.0001)
-        assert_rel_error(self, vsp.wetted_area, 277.323347, 0.0001)
-        assert_rel_error(self, vsp.wetted_volume, 92.116985, 0.0001)
+        assert_rel_error(self, vsp.theoretical_area, 374.888362, 0.0007)
+        assert_rel_error(self, vsp.theoretical_volume, 104.646845, 0.002)
+        assert_rel_error(self, vsp.wetted_area, 277.323347, 0.0006)
+        assert_rel_error(self, vsp.wetted_volume, 92.116985, 0.002)
 
     def test_ge90(self):
         logging.debug('')
@@ -124,10 +128,10 @@ class TestCase(unittest.TestCase):
         vsp.run()
 
         # 'desired' from Linux, 'tolerance' for Mac/Windows.
-        assert_rel_error(self, vsp.theoretical_area, 2043.568902, 0.0001)
-        assert_rel_error(self, vsp.theoretical_volume, 1031.974785, 0.0001)
-        assert_rel_error(self, vsp.wetted_area, 1894.494077, 0.0001)
-        assert_rel_error(self, vsp.wetted_volume, 979.795926, 0.0001)
+        assert_rel_error(self, vsp.theoretical_area, 2043.568902, 0.001)
+        assert_rel_error(self, vsp.theoretical_volume, 1031.974785, 0.0003)
+        assert_rel_error(self, vsp.wetted_area, 1894.494077, 0.005)
+        assert_rel_error(self, vsp.wetted_volume, 979.795926, 0.002)
 
     def test_schweizer2_32(self):
         logging.debug('')
@@ -146,10 +150,10 @@ class TestCase(unittest.TestCase):
         vsp.run()
 
         # 'desired' from Linux, 'tolerance' for Mac/Windows.
-        assert_rel_error(self, vsp.theoretical_area, 688.442371, 0.0001)
-        assert_rel_error(self, vsp.theoretical_volume, 177.148284, 0.0001)
-        assert_rel_error(self, vsp.wetted_area, 590.724803, 0.0001)
-        assert_rel_error(self, vsp.wetted_volume, 155.390161, 0.0001)
+        assert_rel_error(self, vsp.theoretical_area, 688.442371, 0.0003)
+        assert_rel_error(self, vsp.theoretical_volume, 177.148284, 0.0009)
+        assert_rel_error(self, vsp.wetted_area, 590.724803, 0.0003)
+        assert_rel_error(self, vsp.wetted_volume, 155.390161, 0.0009)
 
     def test_hwb(self):
         logging.debug('')

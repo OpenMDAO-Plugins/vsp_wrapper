@@ -1,13 +1,13 @@
 import csv
-import os.path
+import os
 import xml.etree.cElementTree as ElementTree
 
-from openmdao.main.api import FileMetadata, set_as_top
+from openmdao.main.api import FileMetadata
 from openmdao.lib.datatypes.api import Bool, Float, Int, Str
 from openmdao.lib.components.external_code import ExternalCode
+from openmdao.util.fileutil import find_in_path
 
 from vsp_wrapper.geometry import VSPGeometry
-
 
 class VSP(ExternalCode):
     """
@@ -72,12 +72,15 @@ class VSP(ExternalCode):
             self.raise_exception('CFD meshing and NASCART output use the same'
                                  ' output filenames', RuntimeError)
 
+        if not os.path.isfile(self.vsp_path) and find_in_path(self.vsp_path) is None:
+            raise RuntimeError("VSP executable '%s' not found" % self.vsp_path)
+
         # Write XML input file.
         filename = os.path.basename(self.xml_filename)
-        if filename.endswith('.xml'):
+        if filename.endswith('.vsp'):
             base_filename = filename[:-4]
-        else:
-            base_filename = filename
+        else:  # .xml input files leave the .new in the output filenames ????
+            base_filename = filename + '.new'
         filename += '.new'
         self.write_input(filename)
 
@@ -133,10 +136,10 @@ class VSP(ExternalCode):
         self.stdout = os.path.basename(self.xml_filename)+'.log'
         self.stderr = ExternalCode.STDOUT
         super(VSP, self).execute()
-       
+
         # Read from -compgeom output.
         if self.comp_geom:
-            reader = csv.reader(open(filename + '_CompGeom.csv', 'r'))
+            reader = csv.reader(open(base_filename + '_CompGeom.csv', 'r'))
             next(reader)
             row = []
             wet_areas = {'Horizontal_Tail':0, 'Vertical_Tail':0, 'Wing':0, 'Fuselage':0}
