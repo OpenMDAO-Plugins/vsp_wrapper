@@ -24,29 +24,35 @@ The vsp_wrapper exposes the XML parameters found in the input container, execute
     wing_wet_area = Float(iotype='out', desc='External area of wing.')
     fuse_wet_area = Float(iotype='out', desc='External area of fuselage.')
 
-VSP can be imported from ''vsp_wrapper.py'', which should be in the site-packages directory of 
-your activated Python environment once it is installed.
+VSPParametricGeometry can be imported from the vsp_wrapper package, which should be in the site-packages 
+directory of your activated Python environment once it is installed.
 
 ::
 
-    from vsp_wrapper import VSP
+from vsp_wrapper import VSPParametricGeometry
 
 Generally, the easiest way for you to import your existing VSP container into the OpenMDAO component is to create
-a component instance and add it to the workflow
+a GeomComponent instance and fill its parametric_geometry Slot with a VSPParametricGeometry object, 
+then add it to the workflow
 
 ::
+
+    from openmdao.lib.components.geomcomp import GeomComponent
 
     class VSP_Model(Assembly):
     
          def configure(self):
             super(VSP_Model, self).configure()
             #create component instance and add to workflow
-            self.add('vsp', VSP('Cessna182.xml'))
+            self.add('gcomp', GeomComponent())
+            self.gcomp.add('parametric_geometry', VSPParametricGeometry())
+            self.gcomp.parametric_geometry.model_file = 'Cessna182.vsp'
 
-When the vsp_wrapper is instantiated, an XML file must be specified in order for it to run, as can be seen from above.
+When the vsp_wrapper is instantiated, a .vsp file, which is just an XML file internally, must be 
+specified by setting the ``model_file`` attribute in order for it to run, as can be seen from above.
 
-When updating input values for the vsp wrapper, the XML file must be updated.  As an example, below you can see an 
-abbreviated form of the Cessna182.xml file referenced above.
+When updating input values for the VSP wrapper, the .vsp file must be updated.  As an example, below you can see an 
+abbreviated form of the Cessna182.vsp file referenced above.
 
 ::
 
@@ -109,31 +115,34 @@ abbreviated form of the Cessna182.xml file referenced above.
             </Cross_Section>
             
 
-In general, 'terminal' nodes become Variables with names forced to lower-case, lists become enumerated Containers starting at zero, 
-and vary similar to the generic structure shown below.
+In general, 'terminal' nodes become Variables with names forced to lower-case, lists become enumerated Containers starting at zero, and vary similar to the generic structure shown below.
+
+When the VSPParametricGeometry object is added to the GeomComp, its variables are promoted up to the GeomComponent
+and should be accessed from there.
 
 ::
 
-    instance_of_wrapper.geometry.Part_Name.List_(0,1,2,3...).variable
+    geomcompname.geometry.Part_Name.List_(0,1,2,3...).variable
 
 In this example, 'Fuse_Length' would be mapped to:
 
 ::
 
-    vsp.geometry.Fuselage.fuse_parms.fuse_length
+    gcomp.geometry.Fuselage.fuse_parms.fuse_length
     
 Whereas 'Width' under IML Parms in the first cross section would be mapped to:
 
 ::
 
-    vsp.geometry.Fuselage.Cross_Section_0.iml_parms.width
+    gcomp.geometry.Fuselage.Cross_Section_0.iml_parms.width
         
 These variables can be changed by simply assigning a value:
 
 ::
 
-     vsp.geometry.Fuselage.fuse_parms.fuse_length = 24
-     vsp.geometry.Fuselage.Cross_Section_0.iml_parms.width = 2.7
+     gcomp.geometry.Fuselage.fuse_parms.fuse_length = 24
+     gcomp.geometry.Fuselage.Cross_Section_0.iml_parms.width = 2.7
      
-Now when the wrapper is run and the new XML file generated, any changes made will be reflected there prior to being passed to
-OpenVSP for analysis.
+Now when the wrapper is run and the new .vsp file generated, any changes made will be reflected there prior to being passed to OpenVSP for analysis.
+
+
