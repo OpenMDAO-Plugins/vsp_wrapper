@@ -202,6 +202,19 @@ ms_wing.py
    :show-inheritance:
 
         
+.. index:: parageom.py
+
+.. _src.vsp_wrapper.parageom.py:
+
+parageom.py
+-----------
+
+.. automodule:: src.vsp_wrapper.parageom
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+        
 .. index:: pod.py
 
 .. _src.vsp_wrapper.pod.py:
@@ -236,6 +249,19 @@ source.py
 ---------
 
 .. automodule:: src.vsp_wrapper.source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+        
+.. index:: test_parageom.py
+
+.. _src.vsp_wrapper.test.test_parageom.py:
+
+test_parageom.py
+----------------
+
+.. automodule:: src.vsp_wrapper.test.test_parageom
    :members:
    :undoc-members:
    :show-inheritance:
