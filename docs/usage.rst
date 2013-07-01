@@ -116,23 +116,31 @@ below you can see an  abbreviated form of the ``Cessna182.vsp`` file referenced 
             </Cross_Section>
             
 
-In general, `terminal` nodes become Variables with names forced to lower-case, lists become enumerated
-Containers starting at zero and vary similar to the generic structure shown below.
+In most cases, the wrapper takes a `terminal` node (an XML entity with no children), forces the name
+to lower case, and makes that an OpenMDAO Variable.  Non-terminal nodes are OpenMDAO Container
+objects.
+
+There are situations where the XML hierarchy gets verbose, such as CrossSectionList containing
+multiple CrossSection objects.  In these cases the wrapper eliminates the CrossSectionList object
+and just names the CrossSection objects CrossSection_0, CrossSection_1, and so on. 
 
 When the VSPParametricGeometry object is added to the GeomComp, its variables are promoted up to the
-GeomComponent and should be accessed from there.
+GeomComponent and should be accessed from there. 
+
+Below is a generic description, where `Part_Name` and `List` are placeholders for specific items in
+a VSP input file. 
 
 ::
 
     geomcompname.geometry.Part_Name.List_(0,1,2,3...).variable
 
-In this example, ``Fuse_Length`` would be mapped to:
+In our example, ``Fuse_Length`` would be mapped to:
 
 ::
 
     gcomp.geometry.Fuselage.fuse_parms.fuse_length
     
-Whereas ``Width`` under IML Parms in the first cross section would be mapped to:
+and ``Width`` under ``IML_Parms`` in the first cross section would be mapped to:
 
 ::
 
