@@ -19,13 +19,14 @@ Package Metadata
     [openmdao.component]
     vsp_wrapper.wrapper.VSP=vsp_wrapper.wrapper:VSP
     [openmdao.container]
-    vsp_wrapper.blank.BlankParms=vsp_wrapper.blank:BlankParms
     vsp_wrapper.component.VSPComponent=vsp_wrapper.component:VSPComponent
+    vsp_wrapper.blank.BlankParms=vsp_wrapper.blank:BlankParms
     vsp_wrapper.cabin.CrossSection=vsp_wrapper.cabin:CrossSection
     vsp_wrapper.external.ExternalParms=vsp_wrapper.external:ExternalParms
     vsp_wrapper.havoc.HavocParms=vsp_wrapper.havoc:HavocParms
     vsp_wrapper.source.LineSource=vsp_wrapper.source:LineSource
     vsp_wrapper.user.UserParms=vsp_wrapper.user:UserParms
+    vsp_wrapper.pod.PodParms=vsp_wrapper.pod:PodParms
     vsp_wrapper.user.User=vsp_wrapper.user:User
     vsp_wrapper.general.GeneralParms=vsp_wrapper.general:GeneralParms
     vsp_wrapper.wing_sect.WingSect=vsp_wrapper.wing_sect:WingSect
@@ -44,7 +45,6 @@ Package Metadata
     vsp_wrapper.fuselage2.FuseParms=vsp_wrapper.fuselage2:FuseParms
     vsp_wrapper.fuselage.CrossSection=vsp_wrapper.fuselage:CrossSection
     vsp_wrapper.duct.DuctParms=vsp_wrapper.duct:DuctParms
-    vsp_wrapper.ms_wing.MSWingParms=vsp_wrapper.ms_wing:MSWingParms
     vsp_wrapper.fuselage.IMLParms=vsp_wrapper.fuselage:IMLParms
     vsp_wrapper.cabin.CabinLayoutParms=vsp_wrapper.cabin:CabinLayoutParms
     vsp_wrapper.mesh.MeshParms=vsp_wrapper.mesh:MeshParms
@@ -52,7 +52,7 @@ Package Metadata
     vsp_wrapper.fuselage.FuseParms=vsp_wrapper.fuselage:FuseParms
     vsp_wrapper.geometry.VSPGeometry=vsp_wrapper.geometry:VSPGeometry
     vsp_wrapper.prop.Prop=vsp_wrapper.prop:Prop
-    vsp_wrapper.pod.PodParms=vsp_wrapper.pod:PodParms
+    vsp_wrapper.ms_wing.MSWingParms=vsp_wrapper.ms_wing:MSWingParms
     vsp_wrapper.hwb.HWBParms=vsp_wrapper.hwb:HWBParms
     vsp_wrapper.external.External=vsp_wrapper.external:External
     vsp_wrapper.source.PointSource=vsp_wrapper.source:PointSource
@@ -93,5 +93,5 @@ Package Metadata
 
 - **summary:** Component wrapper for VSP (Vehicle Sketch Pad)
 
-- **version:** 0.7
+- **version:** 0.8
 
