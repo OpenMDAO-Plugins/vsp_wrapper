@@ -1,7 +1,7 @@
 import string
 import xml.etree.cElementTree as ElementTree
 
-from enthought.traits.trait_base import not_none
+from traits.trait_base import not_none
 
 from openmdao.main.api import Container
 

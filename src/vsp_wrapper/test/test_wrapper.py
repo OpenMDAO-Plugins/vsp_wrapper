@@ -15,7 +15,6 @@ from vsp_wrapper import VSP
 
 ORIG_DIR = os.getcwd()
 VSP_PATH = 'vsp'
-#VSP_PATH = '/home/setowns1/bin/vsp'
 
 
 class TestCase(unittest.TestCase):
