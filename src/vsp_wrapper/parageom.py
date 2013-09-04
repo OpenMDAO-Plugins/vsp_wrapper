@@ -6,7 +6,7 @@ from vsp_wrapper.wrapper import VSP
 
 from pyV3D.stl import STLSender
 
-from enthought.traits.trait_base import not_none
+from traits.trait_base import not_none
 
 
 class VSPParametricGeometry(object):
