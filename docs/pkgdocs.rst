@@ -21,8 +21,8 @@ Package Metadata
     [openmdao.component]
     vsp_wrapper.wrapper.VSP=vsp_wrapper.wrapper:VSP
     [openmdao.container]
-    vsp_wrapper.component.VSPComponent=vsp_wrapper.component:VSPComponent
     vsp_wrapper.blank.BlankParms=vsp_wrapper.blank:BlankParms
+    vsp_wrapper.component.VSPComponent=vsp_wrapper.component:VSPComponent
     vsp_wrapper.cabin.CrossSection=vsp_wrapper.cabin:CrossSection
     vsp_wrapper.external.ExternalParms=vsp_wrapper.external:ExternalParms
     vsp_wrapper.havoc.HavocParms=vsp_wrapper.havoc:HavocParms
@@ -95,5 +95,5 @@ Package Metadata
 
 - **summary:** Component wrapper for VSP (Vehicle Sketch Pad)
 
-- **version:** 0.8
+- **version:** 0.9
 
