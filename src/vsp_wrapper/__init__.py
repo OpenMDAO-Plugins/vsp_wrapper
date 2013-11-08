@@ -9,4 +9,5 @@ and then VSP is run in batch mode.
 from __future__ import absolute_import
 
 from .wrapper import VSP
+from .parageom import VSPParametricGeometry, VSPSender
 

@@ -17,7 +17,11 @@ def _sys_path_add(toadd=None):
         distdir = os.path.dirname(os.path.dirname(__file__))
         sys.path = [distdir] + [os.path.join(distdir, p) for p in toadd] + sys.path
 
+<<<<<<< HEAD
 _sys_path_add(['src', 'src/vsp_wrapper', 'src/vsp_wrapper/test'])
+=======
+_sys_path_add(['vsp_wrapper', 'src', 'src/vsp_wrapper', 'src/vsp_wrapper/test'])
+>>>>>>> be9891c11d90c31553ea59c0f5737b285a41e1c2
 
 # General configuration
 # ---------------------

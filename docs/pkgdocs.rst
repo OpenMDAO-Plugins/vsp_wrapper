@@ -16,6 +16,8 @@ Package Metadata
 
 - **entry_points**:: 
 
+    [openmdao.parametric_geometry]
+    vsp_wrapper.parageom.VSPParametricGeometry=vsp_wrapper.parageom:VSPParametricGeometry
     [openmdao.component]
     vsp_wrapper.wrapper.VSP=vsp_wrapper.wrapper:VSP
     [openmdao.container]
