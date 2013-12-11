@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from openmdao.main.api import set_as_top
+from openmdao.util.fileutil import find_in_path
 from openmdao.main.component import SimulationRoot
 from openmdao.util.testutil import assert_raises, assert_rel_error
 from openmdao.lib.components.geomcomp import GeomComponent
@@ -22,6 +23,8 @@ class TestCase(unittest.TestCase):
     """ Test VSP wrapper functionality. """
 
     def setUp(self):
+        if not find_in_path(VSP_PATH):
+            raise nose.SkipTest('VSP must be installed to run this test.')
         self.startdir = os.getcwd()
         self.tdir = tempfile.mkdtemp()
         os.chdir(self.tdir)
