@@ -166,13 +166,16 @@ class VSP(ExternalCode):
         # Check CFD meshing if requested.
         if self.generate_cfd_mesh:
             mesh_ok = False
-            with open(self.stdout, 'r') as out:
-                for line in out:
-                    if 'Mesh Complete' in line:
+
+        with open(self.stdout, 'r') as out:
+            for line in out:
+                if 'xmlGetNode: Cant find' in line:
+                    self._logger.warning(line[:-1])
+                if self.generate_cfd_mesh:
+                    if 'Total Num Tris' in line:
                         mesh_ok = True
-                        break
-            if not mesh_ok:
-                self.raise_exception('Meshing failed', RuntimeError)
+        if self.generate_cfd_mesh and not mesh_ok:
+            self.raise_exception('Meshing failed', RuntimeError)
 
     def read_input(self, filename=None):
         """ Read XML file. """
