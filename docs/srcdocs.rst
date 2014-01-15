@@ -254,19 +254,6 @@ source.py
    :show-inheritance:
 
         
-.. index:: gui_test.py
-
-.. _vsp_wrapper.test.gui_test.py:
-
-gui_test.py
------------
-
-.. automodule:: vsp_wrapper.test.gui_test
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-        
 .. index:: test_parageom.py
 
 .. _vsp_wrapper.test.test_parageom.py:

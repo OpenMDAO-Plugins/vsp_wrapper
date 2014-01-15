@@ -95,5 +95,5 @@ Package Metadata
 
 - **summary:** Component wrapper for VSP (Vehicle Sketch Pad)
 
-- **version:** 0.8
+- **version:** 0.9
 
