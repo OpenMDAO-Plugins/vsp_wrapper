@@ -1,3 +1,9 @@
+#
+# This is deprecated. OpenMDAO recommends passing geometry data using a
+# variable tree such as GeomData in openmdao.lib.geometry.geom_data
+#
+
+
 import os
 from openmdao.main.interfaces import implements, IParametricGeometry
 from openmdao.lib.geometry.stl import STLGeometryObject
@@ -11,7 +17,7 @@ from traits.trait_base import not_none
 
 class VSPParametricGeometry(object):
     implements(IParametricGeometry)
-    
+
     def __init__(self):
         self._callbacks = []
         self._model_file = None
@@ -72,7 +78,7 @@ class VSPParametricGeometry(object):
         else:
             stl = self.model_file+'.new.stl'
         return STLGeometryObject(stl)
-    
+
     def register_param_list_changedCB(self, callback):
         """Register a callback that will be called when self.invoke_callbacks() is called.
         self.invoke_callbacks() should be called from the inheriting class whenever any
@@ -89,7 +95,7 @@ class VSPParametricGeometry(object):
     def get_attributes(self, io_only=True):
         """Return an attribute dict for use by the openmdao GUI.
         """
-        
+
         return {
             'type': type(self).__name__,
             'Inputs': [
