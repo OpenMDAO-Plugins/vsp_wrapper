@@ -16,17 +16,14 @@ Package Metadata
 
 - **entry_points**:: 
 
-    [openmdao.parametric_geometry]
-    vsp_wrapper.parageom.VSPParametricGeometry=vsp_wrapper.parageom:VSPParametricGeometry
     [openmdao.component]
     vsp_wrapper.wrapper.VSP=vsp_wrapper.wrapper:VSP
     [openmdao.container]
-    vsp_wrapper.blank.BlankParms=vsp_wrapper.blank:BlankParms
     vsp_wrapper.component.VSPComponent=vsp_wrapper.component:VSPComponent
-    vsp_wrapper.fuselage.MLParms=vsp_wrapper.fuselage:MLParms
+    vsp_wrapper.blank.BlankParms=vsp_wrapper.blank:BlankParms
+    vsp_wrapper.cabin.CrossSection=vsp_wrapper.cabin:CrossSection
     vsp_wrapper.external.ExternalParms=vsp_wrapper.external:ExternalParms
     vsp_wrapper.havoc.HavocParms=vsp_wrapper.havoc:HavocParms
-    vsp_wrapper.xml_container.XMLContainer=vsp_wrapper.xml_container:XMLContainer
     vsp_wrapper.source.LineSource=vsp_wrapper.source:LineSource
     vsp_wrapper.user.UserParms=vsp_wrapper.user:UserParms
     vsp_wrapper.pod.PodParms=vsp_wrapper.pod:PodParms
@@ -37,7 +34,7 @@ Package Metadata
     vsp_wrapper.engine.Engine=vsp_wrapper.engine:Engine
     vsp_wrapper.source.BaseSource=vsp_wrapper.source:BaseSource
     vsp_wrapper.wrapper.VSP=vsp_wrapper.wrapper:VSP
-    vsp_wrapper.cabin.CrossSection=vsp_wrapper.cabin:CrossSection
+    vsp_wrapper.fuselage.MLParms=vsp_wrapper.fuselage:MLParms
     vsp_wrapper.prop.PropParms=vsp_wrapper.prop:PropParms
     vsp_wrapper.blank.Blank=vsp_wrapper.blank:Blank
     vsp_wrapper.havoc.Havoc=vsp_wrapper.havoc:Havoc
@@ -56,10 +53,11 @@ Package Metadata
     vsp_wrapper.geometry.VSPGeometry=vsp_wrapper.geometry:VSPGeometry
     vsp_wrapper.prop.Prop=vsp_wrapper.prop:Prop
     vsp_wrapper.ms_wing.MSWingParms=vsp_wrapper.ms_wing:MSWingParms
+    vsp_wrapper.hwb.HWBParms=vsp_wrapper.hwb:HWBParms
     vsp_wrapper.external.External=vsp_wrapper.external:External
     vsp_wrapper.source.PointSource=vsp_wrapper.source:PointSource
     vsp_wrapper.cabin.CabinLayout=vsp_wrapper.cabin:CabinLayout
-    vsp_wrapper.hwb.HWBParms=vsp_wrapper.hwb:HWBParms
+    vsp_wrapper.xml_container.XMLContainer=vsp_wrapper.xml_container:XMLContainer
     vsp_wrapper.wing.WingParms=vsp_wrapper.wing:WingParms
     vsp_wrapper.ms_wing.MSWing=vsp_wrapper.ms_wing:MSWing
     vsp_wrapper.engine.EngineParms=vsp_wrapper.engine:EngineParms
@@ -95,5 +93,5 @@ Package Metadata
 
 - **summary:** Component wrapper for VSP (Vehicle Sketch Pad)
 
-- **version:** 0.9.1
+- **version:** 0.10.0
 

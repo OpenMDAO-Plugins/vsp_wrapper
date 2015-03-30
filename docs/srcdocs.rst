@@ -254,19 +254,6 @@ source.py
    :show-inheritance:
 
         
-.. index:: test_parageom.py
-
-.. _vsp_wrapper.test.test_parageom.py:
-
-test_parageom.py
-----------------
-
-.. automodule:: vsp_wrapper.test.test_parageom
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-        
 .. index:: test_wrapper.py
 
 .. _vsp_wrapper.test.test_wrapper.py:
